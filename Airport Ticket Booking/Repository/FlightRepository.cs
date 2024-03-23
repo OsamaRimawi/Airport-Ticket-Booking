@@ -6,10 +6,26 @@ namespace Airport_Ticket_Booking.Repository;
 
 public class FlightRepository
 {
+    private static List<Flight> _flights;
+
+    public FlightRepository()
+    {
+        _flights = new List<Flight>();
+    }
+
     public List<Flight> GetAllFlights()
     {
-        var flights = new List<Flight>();
-        string filePath = @"Repository\Flight.csv";
+        return _flights;
+    }
+
+    public Flight GetFlightById(int flightId)
+    {
+        return _flights.Find(flight => flight.FlightId == flightId);
+    }
+
+    public bool Upload()
+    {
+        const string filePath = @"Repository\Flight.csv";
         try
         {
             using (TextFieldParser parser = new TextFieldParser(filePath))
@@ -39,16 +55,16 @@ public class FlightRepository
                         }
                     };
 
-                    flights.Add(flight);
+                    _flights.Add(flight);
                 }
             }
         }
-        catch (FileNotFoundException e)
+        catch (Exception e)
         {
-            Console.WriteLine("File Not Found");
-            throw;
+            Console.WriteLine("e");
+            return false;
         }
 
-        return flights;
+        return false;
     }
 }
