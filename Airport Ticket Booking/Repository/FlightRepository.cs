@@ -23,48 +23,51 @@ public class FlightRepository
         return _flights.Find(flight => flight.FlightId == flightId);
     }
 
-    public bool Upload()
+    public void RemoveFlight(Flight flight)
+    {
+        _flights.Remove(flight);
+    }
+
+    public bool UploadFromCsvFile()
     {
         const string filePath = @"Repository\Flight.csv";
         try
         {
-            using (TextFieldParser parser = new TextFieldParser(filePath))
+            using TextFieldParser parser = new TextFieldParser(filePath);
+            parser.TextFieldType = FieldType.Delimited;
+            parser.SetDelimiters(",");
+            parser.HasFieldsEnclosedInQuotes = true;
+
+            parser.ReadLine();
+            while (!parser.EndOfData)
             {
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
-                parser.HasFieldsEnclosedInQuotes = true;
+                string[] fields = parser.ReadFields();
 
-                parser.ReadLine();
-                while (!parser.EndOfData)
+                Flight flight = new Flight
                 {
-                    string[] fields = parser.ReadFields();
-
-                    Flight flight = new Flight
+                    FlightId = int.Parse(fields[0]),
+                    DepartureCountry = fields[1],
+                    DestinationCountry = fields[2],
+                    DepartureDate = DateTime.ParseExact(fields[3], "M/d/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    DepartureAirport = fields[4],
+                    ArrivalAirport = fields[5],
+                    ClassesPrices = new Dictionary<FlightClass, double>
                     {
-                        FlightId = int.Parse(fields[0]),
-                        DepartureCountry = fields[1],
-                        DestinationCountry = fields[2],
-                        DepartureDate = DateTime.ParseExact(fields[3], "M/d/yyyy HH:mm", CultureInfo.InvariantCulture),
-                        DepartureAirport = fields[4],
-                        ArrivalAirport = fields[5],
-                        ClassesPrices = new Dictionary<FlightClass, double>
-                        {
-                            { FlightClass.Economy, double.Parse(fields[6]) },
-                            { FlightClass.Business, double.Parse(fields[7]) },
-                            { FlightClass.FirstClass, double.Parse(fields[8]) }
-                        }
-                    };
+                        { FlightClass.Economy, double.Parse(fields[6]) },
+                        { FlightClass.Business, double.Parse(fields[7]) },
+                        { FlightClass.FirstClass, double.Parse(fields[8]) }
+                    }
+                };
 
-                    _flights.Add(flight);
-                }
+                _flights.Add(flight);
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine("e");
+            Console.WriteLine(e);
             return false;
         }
 
-        return false;
+        return true;
     }
 }

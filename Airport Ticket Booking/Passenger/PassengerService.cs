@@ -5,14 +5,16 @@ namespace Airport_Ticket_Booking.Passenger;
 
 public class PassengerService
 {
-    private BookingsRepository _bookingsRepository;
-    private FlightRepository _flightRepository;
+    private readonly BookingsRepository _bookingsRepository;
+    private readonly FlightRepository _flightRepository;
 
     public PassengerService()
     {
         _bookingsRepository = new BookingsRepository();
         _flightRepository = new FlightRepository();
     }
+
+    #region Book_Flight
 
     public void BookFlight()
     {
@@ -51,6 +53,10 @@ public class PassengerService
         Console.WriteLine("Booking successful!");
     }
 
+    #endregion
+
+    #region Search_For_Flights
+
     public void SearchForFlights()
     {
         Console.WriteLine("******** Flight search! ********");
@@ -68,7 +74,7 @@ public class PassengerService
             if (continueAdding.ToLower() != "y")
                 break;
 
-            Console.WriteLine("Enter Departure Country:");
+            Console.WriteLine("Enter Departure Country: (press Enter to skip)");
             departureCountry = Console.ReadLine();
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
@@ -76,7 +82,7 @@ public class PassengerService
             if (continueAdding.ToLower() != "y")
                 break;
 
-            Console.WriteLine("Enter Destination Country:");
+            Console.WriteLine("Enter Destination Country: (press Enter to skip)");
             destinationCountry = Console.ReadLine();
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
@@ -84,12 +90,16 @@ public class PassengerService
             if (continueAdding.ToLower() != "y")
                 break;
 
-            Console.WriteLine("Enter Departure Date (MM/dd/yyyy HH:mm):");
-            if (!DateTime.TryParseExact(Console.ReadLine(), "MM/dd/yyyy HH:mm", null,
-                    System.Globalization.DateTimeStyles.None, out departureDate))
+            Console.WriteLine("Enter Departure Date (MM/dd/yyyy HH:mm): (press Enter to skip)");
+            string input = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(input))
             {
-                Console.WriteLine("Invalid date format!");
-                continue;
+                if (!DateTime.TryParseExact(input, "MM/dd/yyyy HH:mm", null,
+                        System.Globalization.DateTimeStyles.None, out departureDate))
+                {
+                    Console.WriteLine("Invalid date format!");
+                    continue;
+                }
             }
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
@@ -97,7 +107,7 @@ public class PassengerService
             if (continueAdding.ToLower() != "y")
                 break;
 
-            Console.WriteLine("Enter Departure Airport:");
+            Console.WriteLine("Enter Departure Airport: (press Enter to skip)");
             departureAirport = Console.ReadLine();
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
@@ -105,7 +115,7 @@ public class PassengerService
             if (continueAdding.ToLower() != "y")
                 break;
 
-            Console.WriteLine("Enter Arrival Airport:");
+            Console.WriteLine("Enter Arrival Airport: (press Enter to skip)");
             arrivalAirport = Console.ReadLine();
             break;
         }
@@ -147,6 +157,10 @@ public class PassengerService
             }
         }
     }
+
+    #endregion
+
+    #region Manage_Bookings
 
     public void ManageBookings()
     {
@@ -302,4 +316,6 @@ public class PassengerService
             Console.WriteLine("No personal bookings found!");
         }
     }
+
+    #endregion
 }
