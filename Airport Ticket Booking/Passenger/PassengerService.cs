@@ -172,34 +172,35 @@ public class PassengerService
             return;
         }
 
-        int choice;
-        do
+        while (true)
         {
+            Console.WriteLine("********************");
+            Console.WriteLine("Manage Bookings Menu");
+            Console.WriteLine("********************");
             Console.WriteLine("1. Cancel a Booking");
             Console.WriteLine("2. Modify a Booking");
             Console.WriteLine("3. View Personal Bookings");
             Console.WriteLine("4. Go Back");
             Console.WriteLine("Enter your choice (1-4):");
-
-            if (!int.TryParse(Console.ReadLine(), out choice))
-            {
-                Console.WriteLine("Invalid choice!");
-                return;
-            }
-
+            var choice = Console.ReadLine();
             switch (choice)
             {
-                case 1:
+                case "1":
                     CancelBooking(passengerId);
                     break;
-                case 2:
+                case "2":
                     ModifyBooking(passengerId);
                     break;
-                case 3:
+                case "3":
                     ViewPersonalBookings(passengerId);
                     break;
+                case "4":
+                    return;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
             }
-        } while (choice != 4);
+        }
     }
 
     private void CancelBooking(int passengerId)
@@ -257,7 +258,7 @@ public class PassengerService
 
         Console.WriteLine($"Current Flight ID: {booking.Flight.FlightId}");
         Console.WriteLine("Enter new Flight ID (press Enter to keep current):");
-        string newFlightIdInput = Console.ReadLine();
+        var newFlightIdInput = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newFlightIdInput))
         {
             if (int.TryParse(newFlightIdInput, out int newFlightId))
@@ -301,7 +302,7 @@ public class PassengerService
     private void ViewPersonalBookings(int passengerId)
     {
         Console.WriteLine("******** View Personal Bookings ********");
-        List<Booking> personalBookings = _bookingsRepository.GetPersonalBookings(passengerId);
+        var personalBookings = _bookingsRepository.GetPersonalBookings(passengerId);
         if (personalBookings.Any())
         {
             Console.WriteLine("Personal Bookings:");

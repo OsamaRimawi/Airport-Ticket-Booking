@@ -21,8 +21,8 @@ public class ManagerService
     {
         Console.WriteLine("******** Bookings search! ********");
 
-        int passengerId = -1;
-        int flightId = -1;
+        var passengerId = -1;
+        var flightId = -1;
         var departureCountry = "";
         var destinationCountry = "";
         var departureDate = DateTime.MinValue;

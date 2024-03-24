@@ -41,9 +41,9 @@ public class FlightRepository
             parser.ReadLine();
             while (!parser.EndOfData)
             {
-                string[] fields = parser.ReadFields();
+                var fields = parser.ReadFields();
 
-                Flight flight = new Flight
+                var flight = new Flight
                 {
                     FlightId = int.Parse(fields[0]),
                     DepartureCountry = fields[1],
