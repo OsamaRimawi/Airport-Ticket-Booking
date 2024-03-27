@@ -4,7 +4,7 @@ namespace Airport_Ticket_Booking.Models;
 
 public class Booking
 {
-    private static int _lastBookingId = 0;
+    private static int _lastBookingId;
     public int BookingId { get; set; }
     public Flight Flight { get; set; }
     public int PassengerId { get; set; }

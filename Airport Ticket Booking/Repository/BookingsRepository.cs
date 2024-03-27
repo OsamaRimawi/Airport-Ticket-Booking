@@ -23,16 +23,14 @@ public class BookingsRepository
 
     public bool CancelBooking(int bookingId)
     {
-        Booking bookingToRemove = _bookings.FirstOrDefault(booking => booking.BookingId == bookingId);
+        var bookingToRemove = _bookings.FirstOrDefault(booking => booking.BookingId == bookingId);
         if (bookingToRemove != null)
         {
             _bookings.Remove(bookingToRemove);
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     public Booking GetBookingById(int bookingId)

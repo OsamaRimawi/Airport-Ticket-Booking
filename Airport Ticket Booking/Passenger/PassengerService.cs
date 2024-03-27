@@ -70,8 +70,8 @@ public class PassengerService
         while (true)
         {
             Console.WriteLine("Do you want add fields for the search? (Y/N)");
-            string continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            var continueAdding = Console.ReadLine();
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Departure Country: (press Enter to skip)");
@@ -79,7 +79,7 @@ public class PassengerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Destination Country: (press Enter to skip)");
@@ -87,11 +87,11 @@ public class PassengerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Departure Date (MM/dd/yyyy HH:mm): (press Enter to skip)");
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(input))
             {
                 if (!DateTime.TryParseExact(input, "MM/dd/yyyy HH:mm", null,
@@ -104,7 +104,7 @@ public class PassengerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Departure Airport: (press Enter to skip)");
@@ -112,7 +112,7 @@ public class PassengerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Arrival Airport: (press Enter to skip)");

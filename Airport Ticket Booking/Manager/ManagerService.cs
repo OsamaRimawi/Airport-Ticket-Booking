@@ -34,13 +34,13 @@ public class ManagerService
         while (true)
         {
             Console.WriteLine("Do you want add fields for the search? (Y/N)");
-            string continueAdding = Console.ReadLine();
+            var continueAdding = Console.ReadLine();
             if (continueAdding.ToLower() != "y")
                 break;
 
 
             Console.WriteLine("Enter Passenger ID: (press Enter to skip)");
-            string input = Console.ReadLine();
+            var input = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(input))
             {
                 if (!int.TryParse(input, out passengerId))
@@ -52,7 +52,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Flight ID: (press Enter to skip)");
@@ -68,7 +68,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Departure Country: (press Enter to skip)");
@@ -76,7 +76,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Destination Country: (press Enter to skip)");
@@ -84,7 +84,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Departure Date (MM/dd/yyyy HH:mm): (press Enter to skip)");
@@ -101,7 +101,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Departure Airport: (press Enter to skip)");
@@ -109,7 +109,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Arrival Airport: (press Enter to skip)");
@@ -117,7 +117,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Price: (press Enter to skip)");
@@ -133,7 +133,7 @@ public class ManagerService
 
             Console.WriteLine("Do you want to continue adding fields? (Y/N)");
             continueAdding = Console.ReadLine();
-            if (continueAdding.ToLower() != "y")
+            if (continueAdding?.ToLower() != "y")
                 break;
 
             Console.WriteLine("Enter Class Type (Economy/Business/FirstClass): (press Enter to skip)");
